@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 class App extends React.Component{
