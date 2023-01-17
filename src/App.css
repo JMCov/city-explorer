@@ -27,12 +27,36 @@
 .App-link {
   color: #61dafb;
 }
+h1{
+  text-align: center;
+  background-color: black;
+  color: whitesmoke;
+}
+html {
+  background-color: black;
+}
+#root{
+  background-color: black;
+}
+label {
+  color: white;
+}
+form {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
 main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
+.card {
+  margin-top: 10px;
+}
+.card-body {
+  background-color: gainsboro;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
