@@ -3,6 +3,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Cities from './Cities';
+import Weather from './Weather';
 
 
 class App extends React.Component {
@@ -14,7 +15,9 @@ class App extends React.Component {
       error: false,
       errorMessage: '',
       mapUrl: '',
-      isCity: false
+      isCity: false,
+      weatherData: [],
+      isWeather: false
 
     }
   }
@@ -29,27 +32,44 @@ class App extends React.Component {
     e.preventDefault();
 
     try {
-      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_KEY}&q=${this.state.city}&format=json&limit=20`;
-
-      console.log(url);
+      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_KEY}&q=${this.state.city}&format=json&limit=1`;
+      
+      
       let cityDataFromAxios = await axios.get(url)
-      console.log(cityDataFromAxios)
+      
       this.setState({
         cityData: cityDataFromAxios.data,
         error: false,
         isCity: true,
       })
-
+      this.handleWeather();
     } catch (error) {
-      console.log(error);
+      
       this.setState({
         error: true,
         errorMessage: error.message
       })
     }
   }
+handleWeather = async () => {
+  try {
+    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`);
+    console.log(weatherData)
+    this.setState({
+      weatherData: weatherData.data,
+      isWeather: true
+      })
+
+  } catch (error) {
+    this.setState({
+    error: true,
+    errorMessage: error.message
+    })
+  }
+}
 
   render() {
+    console.log(this.state)
     return (
       <>
         <h1>City Explorer</h1>
@@ -63,9 +83,14 @@ class App extends React.Component {
         {
           this.state.error
             ? <p>{this.state.errorMessage}</p>
-            : <Cities
-              cityData={this.state.cityData}
-            />
+            : <div>
+                <Cities
+                 cityData={this.state.cityData}
+                 />
+                 <Weather 
+                 weatherData={this.state.weatherData}
+                 />
+             </div>
         }
         </main>
       </>
