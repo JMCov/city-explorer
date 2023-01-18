@@ -51,8 +51,14 @@ main {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+p {
+  color: red;
+}
 .card {
   margin-top: 10px;
+}
+.card-title{
+  color: red;
 }
 .card-body {
   background-color: gainsboro;
