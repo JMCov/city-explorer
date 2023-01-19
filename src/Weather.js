@@ -7,9 +7,9 @@ class Weather extends React.Component {
   render() {
     return (
       <>
-        {this.props.weatherData.map((e) => {
+        {this.props.weatherData.map((e, idx) => {
           return (
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} key = {idx}>
               <Card.Body>
                 <Card.Title>Date: {e.date}</Card.Title>
                 <Card.Text>Weather: {e.description}</Card.Text>
